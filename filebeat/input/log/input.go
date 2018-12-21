@@ -420,6 +420,7 @@ func (p *Input) scan() {
 	var sortInfos []FileSortInfo
 	var files []string
 
+	// 获取所有需要监控文件的文件信息
 	paths := p.getFiles()
 
 	var err error
@@ -435,6 +436,7 @@ func (p *Input) scan() {
 		files = getKeys(paths)
 	}
 
+	// paths 文件信息集合
 	for i := 0; i < len(paths); i++ {
 
 		var path string
