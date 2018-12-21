@@ -170,6 +170,7 @@ func (h *Harvester) ID() uuid.UUID {
 
 // Setup opens the file handler and creates the reader for the harvester
 func (h *Harvester) Setup() error {
+	// 打开文件，存入h.source
 	err := h.open()
 	if err != nil {
 		return fmt.Errorf("Harvester setup failed. Unexpected file opening error: %s", err)
@@ -430,9 +431,11 @@ func (h *Harvester) openFile() error {
 		return fmt.Errorf("Failed opening %s: %s", h.state.Source, err)
 	}
 
+	// 打开文件计数+1
 	harvesterOpenFiles.Add(1)
 
 	// Makes sure file handler is also closed on errors
+	// 看打开的文件能否正常工作
 	err = h.validateFile(f)
 	if err != nil {
 		f.Close()
